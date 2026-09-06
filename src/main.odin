@@ -21,6 +21,7 @@ import save "sim:save"
 import sim "sim:sim"
 import text "sim:text"
 import ui "sim:ui"
+import crew "sim:crew"
 import input "sim:input"
 import people "sim:people"
 import audio "sim:audio"
@@ -62,6 +63,9 @@ Dev_Opts :: struct {
 	skim:       bool,   // park in the thickest gas of the first nebula and start skimming (dev)
 	mapzoom:    f32,    // with --map: initial map zoom (dev)
 	doom:       bool,   // drop the ship into the star from four radii (dev)
+	inside:     bool,   // open the deck plan of the ship at start (dev)
+	hull:       string, // start in this hull class by name (dev)
+	crew_days:  f64,    // stand the crew's posts for this many days before the first frame (dev)
 	until_dead: bool,   // with --screenshot: capture shortly after the ship is destroyed (dev)
 	menu:       int,    // open this menu index at start (dev), 0 = none
 	trace:      bool,   // print autopilot stage changes (dev)
@@ -138,6 +142,9 @@ parse_opts :: proc() -> (o: Dev_Opts) {
 		case "--skim":       o.skim = true
 		case "--mapzoom":    z, _ := strconv.parse_f64(next); o.mapzoom = f32(z); i += 1
 		case "--doom":       o.doom = true
+		case "--inside":     o.inside = true
+		case "--hull":       o.hull = next; i += 1
+		case "--crew-days":  o.crew_days, _ = strconv.parse_f64(next); i += 1
 		case "--until-dead": o.until_dead = true
 		case "--menu":       o.menu, _ = strconv.parse_int(next); i += 1
 		case "--trace":      o.trace = true
@@ -216,6 +223,12 @@ Game :: struct {
 	prev_hazard: sim.Hazard,
 	prev_ap_active: bool,
 	start_class: econ.Class_Id, // hull chosen at New game; the ship spawns as this class
+	// The crew (crew_game.odin): who is aboard, the deck they walk, and what they do for the ship.
+	roster:      crew.Roster,
+	deck:        crew.Deck,
+	crew_fx:     crew.Effects,
+	inside_open: bool, // the deck plan is up over the world
+	inside:      ui.Ship_View_State,
 	// Cryo transit state.
 	cryo:     struct {
 		active:   bool,
@@ -481,6 +494,7 @@ game_load_galaxy :: proc(g: ^Game, params: gen.Galaxy_Params, t: f64) {
 	g.cryo_pending = -1
 	ui.log_clear(&g.log)
 	g.log_state = {}
+	crew.roster_init(&g.roster, g.seed, crew.BUNKS[g.start_class])
 	game_enter_system(g, 0, t)
 }
 
@@ -501,6 +515,7 @@ game_enter_system :: proc(g: ^Game, index: int, t: f64) {
 	g.ship = sim.spawn_in_orbit(&g.sys, host, 0.3, t, sim.CLASSES[g.start_class].stats)
 	g.ship.class = g.start_class
 	g.ship.name = econ.CLASS_NAMES[g.start_class]
+	crew_refit(g)
 	// Nothing to park beside at a nebula site: start where a cryo arrival
 	// would put you, just outside the cloud.
 	if len(g.sys.stations) == 0 && len(g.sys.nebulae) > 0 do sim.arrive(&g.sys, &g.ship, t)
@@ -613,6 +628,7 @@ focus_name :: proc(g: ^Game) -> string {
 
 // Exact name first, then a case-insensitive substring match.
 focus_by_name :: proc(g: ^Game, name: string) -> bool {
+	if name == "ship" || strings.equal_fold(name, g.ship.name) { g.focus = Focus{.Ship, 0}; return true }
 	for b, i in g.sys.bodies do if b.name == name { g.focus = Focus{.Body, i}; return true }
 	for s, i in g.sys.stations do if s.name == name { g.focus = Focus{.Station, i}; return true }
 	for n, i in g.sys.nebulae do if n.name == name { g.focus = Focus{.Nebula, i}; return true }
@@ -716,6 +732,8 @@ main :: proc() {
 	art.library_load(&lib, "freighter", "ships/freighter.fart")
 	art.library_load(&lib, "sleeper", "ships/sleeper.fart")
 	art.library_load(&lib, "icon", "ui/fastart_icon.fart")
+	art.library_load(&lib, "crew", "crew/crew.fart")
+	art.library_load(&lib, "deck", "crew/deck.fart")
 	render.avatar_load(&lib)
 
 	clock := core.Clock{warp_index = opts.warp > 0 ? min(opts.warp, len(core.WARP_LEVELS) - 1) : 0, t = opts.time}
@@ -734,9 +752,10 @@ main :: proc() {
 	defer talk_close(&g)
 	// Dev flags start straight into a game; otherwise the start menu shows.
 	direct := opts.play || opts.screenshot != "" || opts.dest != "" || opts.stars || opts.nebulae || opts.skim || opts.cryo != 0 || opts.map_sel != 0 ||
-		opts.waypoint != "" || opts.hover != "" || opts.market || opts.contacts || opts.node != "" || opts.doom || opts.system > 0 || opts.seed != 1
+		opts.waypoint != "" || opts.hover != "" || opts.market || opts.contacts || opts.node != "" || opts.doom || opts.inside || opts.system > 0 || opts.seed != 1
 	if opts.title != "" do direct = opts.play // a menu screenshot starts without a game unless asked
 	has_game := direct
+	if opts.hull != "" do for c in econ.Class_Id do if strings.equal_fold(econ.CLASS_NAMES[c], opts.hull) do g.start_class = c
 	if direct do game_load_galaxy(&g, gen.Galaxy_Params{seed = opts.seed, systems = gen.GALAXY_SYSTEMS}, clock.t)
 	if opts.stars {
 		fmt.printfln("galaxy seed %d: %v, %d systems", g.seed, g.galaxy.kind, len(g.galaxy.systems))
@@ -853,6 +872,8 @@ main :: proc() {
 		if len(g.sys.stations) > 0 do sim.dock(&g.sys, &g.ship, 0, clock.t)
 		g.market_open = true
 	}
+	if opts.inside do g.inside_open = true
+	if opts.crew_days > 0 do crew.roster_work(&g.roster, opts.crew_days * core.SECONDS_PER_DAY)
 	switch opts.talk {
 	case "vendor": if len(g.sys.stations) > 0 do talk_open(&g, .Station, 0, "greeting", clock.t)
 	case "pilot":  if len(g.fleet.npcs) > 0 do talk_open(&g, .Npc, 0, "greeting", clock.t)
@@ -875,6 +896,8 @@ main :: proc() {
 		gen.galaxy_destroy(&g.galaxy)
 		sim.fleet_destroy(&g.fleet)
 		delete(g.npc_anims)
+		crew.roster_destroy(&g.roster)
+		crew.deck_destroy(&g.deck)
 	}
 	focus_requested := opts.focus != "" && focus_by_name(&g, opts.focus)
 	if opts.burn { g.ship.hold = .Prograde; g.ship.throttle = 1 }
@@ -1113,6 +1136,7 @@ main :: proc() {
 		if input.pressed(.Market) do apply_action(&g, &cam, &clock, &panel, &regen, .Market_Window, clock.t)
 		if input.pressed(.Shipyard) do apply_action(&g, &cam, &clock, &panel, &regen, .Shipyard_Window, clock.t)
 		if input.pressed(.Galaxy_Map) do apply_action(&g, &cam, &clock, &panel, &regen, .Galaxy_Map, clock.t)
+		if input.pressed(.Ship_Interior) do apply_action(&g, &cam, &clock, &panel, &regen, .Ship_Interior, clock.t)
 		if input.pressed(.Quick_Save) do apply_action(&g, &cam, &clock, &panel, &regen, .Save_Game, clock.t)
 		if input.pressed(.Quick_Load) do apply_action(&g, &cam, &clock, &panel, &regen, .Load_Game, clock.t)
 		if input.pressed(.Undock) do apply_action(&g, &cam, &clock, &panel, &regen, .Undock, clock.t)
@@ -1207,7 +1231,7 @@ main :: proc() {
 		sim.fleet_update(&g.fleet, &g.sys, g.econ, t_prev, game_dt)
 		lap(&mark, &part_worst[1])
 		ride_host(&g, clock.t)
-		sim.shuttle_step(&g.sys, g.econ, &g.ship, &g.shuttle, &g.credits, game_dt)
+		sim.shuttle_step(&g.sys, g.econ, &g.ship, &g.shuttle, &g.credits, game_dt, g.crew_fx.trade_edge)
 		sim.skim_step(&g.sys, &g.ship, &g.skim, game_dt)
 		{
 			was := g.order.stage
@@ -1249,6 +1273,7 @@ main :: proc() {
 		econ.boards_refresh(g.econ, &g.sys, clock.t)
 		contracts_update(&g, clock.t)
 		hazard_check(&g)
+		crew_update(&g, game_dt, real_dt)
 		arrival_check(&g, clock.t)
 		hail_check(&g, clock.t)
 		log_update(&g, clock.t)
@@ -1387,7 +1412,7 @@ main :: proc() {
 			render.draw_nebula_interior(&cam, &g.sys, ship_p)
 		}
 
-		if !g.map_open {
+		if !g.map_open && !g.inside_open {
 			legend := [?]render.Legend_Entry {
 				{"planet", render.ORBIT_COLOR, 1, core.debug.show_orbits},
 				{"moon", render.MOON_ORBIT, 1, core.debug.show_orbits},
@@ -1405,8 +1430,8 @@ main :: proc() {
 		// ---- UI stack; anything hot keeps world input away
 		ui_hot = false
 		ui.right_inset = 0
-		if !g.map_open do ui_hot |= draw_hud(&clock, &g, &lib, !g.market_open && !g.yard_open)
-		if sim.skim_active(&g.skim) && !g.map_open && g.skim.nebula < len(g.sys.nebulae) {
+		if !g.map_open && !g.inside_open do ui_hot |= draw_hud(&clock, &g, &lib, !g.market_open && !g.yard_open)
+		if sim.skim_active(&g.skim) && !g.map_open && !g.inside_open && g.skim.nebula < len(g.sys.nebulae) {
 			n := g.sys.nebulae[g.skim.nebula]
 			rate, _ := sim.hazard_at(&g.sys, ship_world(&g, clock.t))
 			stop, hot := ui.skim_panel_draw(ui.Skim_View{
@@ -1416,7 +1441,7 @@ main :: proc() {
 			if stop { sim.skim_stop(&g.skim); audio.play(.Close) }
 			ui_hot ||= hot
 		}
-		if g.contacts.open {
+		if g.contacts.open && !g.inside_open {
 			rows := build_contacts(&g, clock.t)
 			pick_c, did, hot := ui.contacts_draw(&g.contacts, rows)
 			if did {
@@ -1432,13 +1457,13 @@ main :: proc() {
 			}
 			ui_hot |= hot
 		}
-		if g.planning {
+		if g.planning && !g.inside_open {
 			chosen, closed, hot := ui.plan_table_draw(destination_name(&g, g.plan_dest), plan_rows(&g, clock.t))
 			if chosen >= 0 do choose_plan(&g, chosen, clock.t)
 			if closed do g.planning = false
 			ui_hot |= hot
 		}
-		if g.selected >= 0 && g.selected < len(g.ship.nodes) && !sim.is_dead(&g.ship) {
+		if g.selected >= 0 && g.selected < len(g.ship.nodes) && !sim.is_dead(&g.ship) && !g.inside_open {
 			n := &g.ship.nodes[g.selected]
 			g.np_pro = f32(n.prograde)
 			g.np_rad = f32(n.radial)
@@ -1488,12 +1513,12 @@ main :: proc() {
 			if closed || rl.IsKeyPressed(.ESCAPE) do g.map_open = false
 			ui_hot |= hot
 		}
-		if g.routes_open {
+		if g.routes_open && !g.inside_open {
 			closed, hot := ui.routes_panel_draw(g.econ, &g.sys, g.fleet.routes)
 			if closed do g.routes_open = false
 			ui_hot |= hot
 		}
-		if g.yard_open {
+		if g.yard_open && !g.inside_open {
 			if st, ok := trade_market(&g); ok && g.econ.markets[st].is_yard {
 				g.yard_station = st
 			} else {
@@ -1501,7 +1526,7 @@ main :: proc() {
 				ui_hot |= ui.empty_panel_draw("Shipyard", "No shipyard in range.\nDock at one, or come within docking range, to buy hulls.", &g.yard_open)
 			}
 		}
-		if g.yard_open && g.yard_station >= 0 {
+		if g.yard_open && g.yard_station >= 0 && !g.inside_open {
 			m := &g.econ.markets[g.yard_station]
 			rows: [econ.NUM_CLASSES]ui.Yard_Row
 			for c, k in econ.Class_Id {
@@ -1517,7 +1542,7 @@ main :: proc() {
 			if did do buy_ship(&g, buy, clock.t)
 			ui_hot |= hot
 		}
-		if g.market_open {
+		if g.market_open && !g.inside_open {
 			if st, ok := trade_market(&g); ok {
 				g.market_station = st
 			} else {
@@ -1525,7 +1550,7 @@ main :: proc() {
 				ui_hot |= ui.empty_panel_draw("Market", "No market in range.\nDock at a station or come within docking range, or park in a low orbit over a colony.", &g.market_open)
 			}
 		}
-		if g.market_open && g.market_station >= 0 {
+		if g.market_open && g.market_station >= 0 && !g.inside_open {
 			vendor_refresh(&g, g.market_station, clock.t)
 			mk := &g.econ.markets[g.market_station]
 			shuttle: ^sim.Shuttle
@@ -1535,7 +1560,7 @@ main :: proc() {
 			}
 			trade, did, talk, jobs, cancel, hot := ui.market_panel_draw(ui.Market_View {
 				market = mk, cargo = g.ship.cargo[:], cargo_cap = g.ship.stats.cargo_cap,
-				credits = g.credits, propellant_pct = 100 * g.ship.propellant / g.ship.stats.propellant_cap,
+				credits = g.credits, propellant_pct = 100 * g.ship.propellant / g.ship.stats.propellant_cap, edge = g.crew_fx.trade_edge,
 				lib = &lib, vendor = g.vendor_avatar, vendor_name = g.vendor.name, vendor_line = g.vendor_line,
 				shuttle = shuttle, round_trip = 2 * sim.shuttle_leg_time(&g.sys, &g.ship) + sim.SHUTTLE_SURFACE_TIME,
 			}, &g.market_open)
@@ -1551,7 +1576,7 @@ main :: proc() {
 		if g.talk.open {
 			if g.talk.kind == .Npc && g.talk.index >= len(g.fleet.npcs) do talk_close(&g)
 		}
-		if g.talk.open {
+		if g.talk.open && !g.inside_open {
 			names := people.PERSONALITY_NAMES
 			v := ui.Talk_View{lib = &lib, avatar = g.talk.avatar, name = g.talk.person.name, mood = names[g.talk.person.personality], line = g.talk.line, is_pilot = g.talk.kind == .Npc, trading = g.talk.trading, can_haggle = !g.talk.haggled, can_trade = !g.talk.remote}
 			if g.talk.kind == .Npc {
@@ -1569,7 +1594,7 @@ main :: proc() {
 			talk_choose(&g, choice, qty, clock.t)
 			ui_hot |= hot
 		}
-		if !g.map_open {
+		if !g.map_open && !g.inside_open {
 			npc_pos := make([dynamic][2]f64, context.temp_allocator)
 			for &n in g.fleet.npcs do if n.ship.mode != .Docked { p, _ := sim.npc_state(&g.sys, &n, clock.t); append(&npc_pos, p) }
 			half := [2]f64{f64(rl.GetScreenWidth()) * 0.5 / cam.zoom, f64(rl.GetScreenHeight()) * 0.5 / cam.zoom}
@@ -1586,7 +1611,7 @@ main :: proc() {
 			if refocus do follow_ship(&g, &cam)
 			ui_hot |= hot
 		}
-		if g.cryo_pending >= 0 && !g.map_open && !g.ap.active && !g.planning {
+		if g.cryo_pending >= 0 && !g.map_open && !g.inside_open && !g.ap.active && !g.planning {
 			if ok, _ := sim.can_jump(&g.sys, &g.ship); ok {
 				e, _ := gen.edge_between(&g.galaxy, g.current, g.cryo_pending)
 				years := sim.jump_years(e.distance, sim.CLASSES[g.ship.class].cryo_speed)
@@ -1600,7 +1625,7 @@ main :: proc() {
 				ui_hot |= hot
 			}
 		}
-		if g.orbit_prompt.open {
+		if g.orbit_prompt.open && !g.inside_open {
 			go, hot := ui.orbit_prompt_draw(&g.orbit_prompt)
 			if go {
 				g.orbit_prompt.open = false
@@ -1610,7 +1635,7 @@ main :: proc() {
 			}
 			ui_hot |= hot
 		}
-		if g.jobs_open {
+		if g.jobs_open && !g.inside_open {
 			at, has := trade_market(&g)
 			board: []econ.Job
 			if has && at < len(g.econ.boards) do board = g.econ.boards[at].jobs[:]
@@ -1623,6 +1648,7 @@ main :: proc() {
 			if deliver >= 0 do contract_deliver(&g, deliver)
 			ui_hot |= hot
 		}
+		if g.inside_open && !g.map_open do ui_hot |= inside_draw(&g, &lib, clock.t)
 		// Dev runs to completion: answer interruptions with their default while still flying.
 		if opts.screenshot != "" && opts.until_done && g.ap.active && len(g.notices) > 0 do notice_choose(&g, g.notices[0].kind == .Hail ? 1 : 0, clock.t)
 		if len(g.notices) > 0 {
@@ -1640,7 +1666,7 @@ main :: proc() {
 			if choice >= 0 do notice_choose(&g, choice, clock.t)
 			ui_hot |= hot
 		}
-		if g.pin.kind != .None && !g.map_open {
+		if g.pin.kind != .None && !g.map_open && !g.inside_open {
 			action, rect, hot := draw_popover(&g, &cam, &lib, clock.t)
 			g.pin_rect = rect
 			ui_hot |= hot
@@ -1798,7 +1824,7 @@ draw_flight_readout :: proc(g: ^Game, clock: ^core.Clock) -> (hot: bool) {
 		armed      = s.autoburn.active,
 		propellant = s.stats.propellant_cap > 0 ? s.propellant / s.stats.propellant_cap : 0,
 		dv         = sim.dv_remaining(s),
-		dv_full    = s.stats.ve * math.ln((dry + s.stats.propellant_cap) / dry),
+		dv_full    = sim.ve_eff(s) * math.ln((dry + s.stats.propellant_cap) / dry),
 		alt        = r - b.radius,
 		alt_max    = max(ceiling - b.radius, b.radius),
 		speed      = orbit.length(s.vel),
@@ -1813,6 +1839,7 @@ draw_flight_readout :: proc(g: ^Game, clock: ^core.Clock) -> (hot: bool) {
 		vel        = s.vel,
 		hull       = s.hull,
 		hazard     = hazard,
+		repairing  = s.repair_rate > 0 && s.hull < 0.995 && !sim.is_dead(s),
 		dead       = sim.is_dead(s),
 	})
 	draw_status_lines(g, clock)
@@ -2090,7 +2117,8 @@ apply_action :: proc(g: ^Game, cam: ^render.Camera, clock: ^core.Clock, panel: ^
 		if s.mode == .Docked do g.market_open = !g.market_open
 		else do g.plan_msg = "dock at a station to trade"
 	case .Routes_Window:   g.routes_open = !g.routes_open
-	case .Galaxy_Map:      g.map_open = !g.map_open
+	case .Galaxy_Map:      g.map_open = !g.map_open; if g.map_open do g.inside_open = false
+	case .Ship_Interior:   g.inside_open = !g.inside_open; if g.inside_open { g.map_open = false; audio.play(.Open) }
 	case .Save_Game:       g.plan_msg = save_game(g, t, 0) ? "quick saved" : "save failed"
 	case .Load_Game:       load_game(g, clock, 0)
 	case .Save_Slots:      g.request = .Save_Slots
@@ -2105,7 +2133,7 @@ apply_action :: proc(g: ^Game, cam: ^render.Camera, clock: ^core.Clock, panel: ^
 
 save_game :: proc(g: ^Game, t: f64, slot: int) -> bool {
 	os.make_directory("saves")
-	sv := save.capture(g.seed, t, g.current, g.credits, &g.ship, &g.gecon, g.galaxy.params, g.sys.name, g.contracts[:])
+	sv := save.capture(g.seed, t, g.current, g.credits, &g.ship, &g.gecon, g.galaxy.params, g.sys.name, g.contracts[:], &g.roster)
 	return save.write(save.slot_path(slot), sv)
 }
 
@@ -2125,6 +2153,8 @@ load_game :: proc(g: ^Game, clock: ^core.Clock, slot: int) -> bool {
 	save.apply_markets(sv, &g.gecon)
 	game_enter_system(g, sv.current, sv.t)
 	save.apply_ship(sv, &g.sys, &g.ship, sv.t)
+	save.apply_crew(sv, &g.roster)
+	crew_refit(g)
 	clear(&g.contracts)
 	for j in sv.contracts do append(&g.contracts, j)
 	g.focus = Focus{.Ship, 0}
@@ -2269,6 +2299,7 @@ buy_ship :: proc(g: ^Game, c: econ.Class_Id, t: f64) {
 	m.ships[c] -= 1
 	old_cap := g.ship.stats.cargo_cap
 	sim.refit(&g.ship, c)
+	if dropped := crew_refit(g); dropped > 0 do log_line(g, t, .Warn, fmt.tprintf("%d crew went ashore: the %s has only %d bunks", dropped, econ.CLASS_NAMES[c], crew.BUNKS[c]))
 	// Cargo that no longer fits is sold to the market.
 	over := sim.cargo_used(&g.ship) - g.ship.stats.cargo_cap
 	for slot in 0 ..< sim.CARGO_SLOTS {
@@ -2300,16 +2331,18 @@ apply_trade :: proc(g: ^Game, tr: ui.Trade) {
 		sim.shuttle_order(&g.shuttle, tr.commodity, tr.units)
 		return
 	}
+	// The comms officer's edge: a fraction off what you pay, and onto what you are paid.
+	edge := g.crew_fx.trade_edge
 	if tr.units > 0 {
 		want := min(tr.units, sim.cargo_free(&g.ship))
-		moved, cost := econ.buy(m, tr.commodity, want, g.credits)
+		moved, cost := econ.buy(m, tr.commodity, want, g.credits / (1 - edge))
 		g.ship.cargo[slot] += moved
-		g.credits -= cost
+		g.credits -= cost * (1 - edge)
 	} else {
 		want := min(-tr.units, g.ship.cargo[slot])
 		moved, revenue := econ.sell(m, tr.commodity, want)
 		g.ship.cargo[slot] -= moved
-		g.credits += revenue
+		g.credits += revenue * (1 + edge)
 	}
 }
 
@@ -2597,6 +2630,8 @@ draw_popover :: proc(g: ^Game, cam: ^render.Camera, lib: ^art.Library, t: f64) -
 		v.doc_px = v.doc != nil ? min(2.4, 54 / art.doc_length(v.doc)) : 2.4
 		append(&lines, fmt.tprintf("%v around %s", g.ship.mode, g.sys.bodies[g.ship.primary].name))
 		append(&lines, fmt.tprintf("hull %.0f%%, propellant %.0f%%, hold %.0f/%.0f", 100 * g.ship.hull, 100 * g.ship.propellant / g.ship.stats.propellant_cap, sim.cargo_used(&g.ship), g.ship.stats.cargo_cap))
+		append(&lines, crew_summary(g))
+		append(&buttons, ui.Pop_Button{"Go inside", .Inside, true, ""})
 	case .None:
 	}
 	append(&buttons, ui.Pop_Button{"Look at", .Look_At, true, ""})
@@ -2643,6 +2678,7 @@ apply_popover :: proc(g: ^Game, cam: ^render.Camera, a: ui.Pop_Action, t: f64) {
 	case .Skim:        start_skim(g, t)
 	case .Skim_Stop:   sim.skim_stop(&g.skim)
 	case .Look_At:     look_at(g, cam, g.pin, t)
+	case .Inside:      g.inside_open = true; g.map_open = false; audio.play(.Open)
 	}
 }
 

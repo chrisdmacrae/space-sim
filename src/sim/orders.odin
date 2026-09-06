@@ -142,7 +142,7 @@ order_active :: proc(o: ^Order) -> bool {
 rcs_nudge :: proc(sys: ^gen.System, s: ^Ship, dv: [2]f64, t: f64) -> bool {
 	if s.mode != .On_Rails || s.propellant <= 0 do return false
 	m0 := mass(s)
-	s.propellant = max(s.propellant - m0 * (1 - math.exp(-orbit.length(dv) / s.stats.ve)), 0)
+	s.propellant = max(s.propellant - m0 * (1 - math.exp(-orbit.length(dv) / ve_eff(s))), 0)
 	s.vel += dv
 	s.orbit = orbit.from_state(s.pos, s.vel, sys.bodies[s.primary].mu, t)
 	repredict(sys, s, t)

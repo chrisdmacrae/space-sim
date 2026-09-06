@@ -45,6 +45,7 @@ Bind :: enum u8 {
 	Galaxy_Map,
 	Market,
 	Shipyard,
+	Ship_Interior,
 	Pan_Up,
 	Pan_Down,
 	Pan_Left,
@@ -80,7 +81,7 @@ DEFAULTS :: Keymap {
 	.Node_Earlier = .LEFT_BRACKET, .Node_Later = .RIGHT_BRACKET,
 	.Node_Prograde_Up = .EQUAL, .Node_Prograde_Down = .MINUS, .Node_Radial_Up = .APOSTROPHE, .Node_Radial_Down = .SEMICOLON,
 	.Pause = .SPACE, .Warp_Down = .COMMA, .Warp_Up = .PERIOD,
-	.Follow_Ship = .F, .Frame_System = .H, .Cycle_Focus = .TAB, .Galaxy_Map = .J, .Market = .M, .Shipyard = .Y,
+	.Follow_Ship = .F, .Frame_System = .H, .Cycle_Focus = .TAB, .Galaxy_Map = .J, .Market = .M, .Shipyard = .Y, .Ship_Interior = .I,
 	.Pan_Up = .W, .Pan_Down = .S, .Pan_Left = .A, .Pan_Right = .D,
 	.Rotate_Left = .Q, .Rotate_Right = .E, .Rotate_Reset = .HOME, .Heading_Lock = .V,
 	.Quick_Save = .F5, .Quick_Load = .F9, .Regenerate = .R, .Debug_Panel = .GRAVE,
@@ -94,7 +95,7 @@ NAMES :: [Bind]string {
 	.Node_Earlier = "Node earlier (hold)", .Node_Later = "Node later (hold)",
 	.Node_Prograde_Up = "Node prograde + (hold)", .Node_Prograde_Down = "Node prograde - (hold)", .Node_Radial_Up = "Node radial + (hold)", .Node_Radial_Down = "Node radial - (hold)",
 	.Pause = "Pause / resume", .Warp_Down = "Warp slower", .Warp_Up = "Warp faster",
-	.Follow_Ship = "Follow ship", .Frame_System = "Frame whole system", .Cycle_Focus = "Cycle focus", .Galaxy_Map = "Galaxy map", .Market = "Market window", .Shipyard = "Shipyard window",
+	.Follow_Ship = "Follow ship", .Frame_System = "Frame whole system", .Cycle_Focus = "Cycle focus", .Galaxy_Map = "Galaxy map", .Market = "Market window", .Shipyard = "Shipyard window", .Ship_Interior = "Inside the ship (crew)",
 	.Pan_Up = "Pan up (hold)", .Pan_Down = "Pan down (hold)", .Pan_Left = "Pan left (hold)", .Pan_Right = "Pan right (hold)",
 	.Rotate_Left = "Rotate view left (hold)", .Rotate_Right = "Rotate view right (hold)", .Rotate_Reset = "Reset view rotation", .Heading_Lock = "Lock view to ship heading",
 	.Quick_Save = "Quick save", .Quick_Load = "Quick load", .Regenerate = "Regenerate galaxy", .Debug_Panel = "Debug panel",
@@ -106,7 +107,7 @@ group_of :: proc(b: Bind) -> Group {
 	case .Plan_Course, .Dock, .Undock: return .Planning
 	case .Node_Add, .Node_Remove, .Warp_To_Burn, .Execute_Burn, .Node_Earlier, .Node_Later, .Node_Prograde_Up, .Node_Prograde_Down, .Node_Radial_Up, .Node_Radial_Down: return .Nodes
 	case .Pause, .Warp_Down, .Warp_Up: return .Time
-	case .Follow_Ship, .Frame_System, .Cycle_Focus, .Galaxy_Map, .Market, .Shipyard: return .View
+	case .Follow_Ship, .Frame_System, .Cycle_Focus, .Galaxy_Map, .Market, .Shipyard, .Ship_Interior: return .View
 	case .Pan_Up, .Pan_Down, .Pan_Left, .Pan_Right, .Rotate_Left, .Rotate_Right, .Rotate_Reset, .Heading_Lock: return .Camera
 	case .Quick_Save, .Quick_Load, .Regenerate, .Debug_Panel: return .System
 	}

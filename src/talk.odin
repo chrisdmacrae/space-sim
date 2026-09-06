@@ -170,8 +170,9 @@ pilot_offer :: proc(g: ^Game, index: int) -> (o: ui.Talk_Offer, c: econ.Commodit
 	}
 	o.commodity = econ.NAMES[c]
 	o.sell_units = n.ship.cargo[int(c)]
-	o.sell_price = base * (1 - g.talk.discount)
-	o.buy_price = buy
+	// A comms officer on the radio shaves the pilot's price and lifts their offer.
+	o.sell_price = base * (1 - g.talk.discount) * (1 - g.crew_fx.trade_edge)
+	o.buy_price = buy * (1 + g.crew_fx.trade_edge)
 	o.buy_room = min(sim.cargo_free(&n.ship), buy > 0 ? n.credits / buy : 0)
 	o.you_have = g.ship.cargo[int(c)]
 	o.your_room = sim.cargo_free(&g.ship)

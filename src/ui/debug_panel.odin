@@ -143,6 +143,7 @@ debug_panel_draw :: proc(p: ^Debug_Panel, info: Debug_Info) -> (hot: bool) {
 	slider(&y, x, w, "auto time: real s per leg", &core.tuning.auto_leg_seconds, 2, 60)
 	slider(&y, x, w, "price curve k", &core.tuning.price_curve_k, 1.5, 10)
 	slider(&y, x, w, "k_time", &core.tuning.k_time, 0, 5)
+	slider(&y, x, w, "crew xp rate", &core.tuning.crew_xp_rate, 0, 50)
 	slider(&y, x, w, "skim pass, hours", &core.tuning.skim_cycle_hours, 0.25, 12)
 	slider(&y, x, w, "dust: hours to kill a hull", &core.tuning.dust_hull_hours, 10, 600)
 

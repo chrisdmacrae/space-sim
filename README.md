@@ -65,7 +65,8 @@ and the stern jet opposite it, the couple that swings the nose. The turn is
 read from the heading itself, so a hand turn (arrow keys), a prograde hold
 and the autopilot all fire them, and traders get them too.
 
-NPC faces are fastart too: `tools/gen_avatars.py` writes one document per
+The crew sprite and the deck furniture are fastart too, from
+`tools/gen_crew.py` into `assets/crew`. NPC faces are fastart too: `tools/gen_avatars.py` writes one document per
 feature (heads, hair with back and front layers, eyes, brows, noses, mouths,
 facial hair, collars, extras) into `assets/avatars`, and the game layers and
 recolours them per person from a seed (`--avatars` shows a sheet of faces).
@@ -182,6 +183,26 @@ the timer holds until you come back. Dust scours the hull the whole time,
 faster in a remnant, so the wait costs something. Survey ships are built for
 it and yours is not.
 
+**Crew.** The ship carries people, and the people run it. Every hull has
+a number of bunks (the Courier two, the Freighter five) and every crew
+member has a trade and a level, one to five, in each of the ship's
+systems: **Engineering** (hull management: the hull is repaired under way
+and part of any hazard damage is headed off), **Navigation** (propellant
+management: every burn spends less) and **Comms** (talking prices down at
+markets, over the colony shuttle and with pilots). You post a crew member
+to a system and they run it as well as their level there allows; nobody
+posted, nothing happens. Levels come from hours stood on a post, never
+during cryo, faster in the trade they were hired for. **View > Inside the
+ship** (`I`), or Go inside on your ship's card, opens a top-down plan of the
+deck: the bridge at the bow, engineering at the stern, quarters, galley,
+hold and airlock either side of the corridor, with the crew walking between
+their posts and their breaks. Click a crew member, then a room, to post them
+there, or use the buttons on their card; the panel shows each system's
+effect and how far each person is from their next level. Docked at a
+station, it also lists who is looking for a berth that week, for a fee by
+level, and lets crew go ashore. A refit to a smaller hull puts anyone
+without a bunk ashore at the yard.
+
 Interstellar travel starts on the galaxy map (**View > Galaxy
 map**): pick a linked system and press its Jump button. Still deep in the
 system, the button flies you out past the star's grip first and a prompt asks
@@ -199,5 +220,5 @@ rims are drawn by the renderer on top. `View > Trade routes` draws the current
 route table between stations; a legend of line kinds sits at the top.
 
 `./bin/space-sim --seed 7` picks a system. For smoke tests,
-`--screenshot out.png [--frames N] [--panel] [--overview] [--burn] [--flyby] [--node T,PRO,RAD] [--execute] [--dest NAME --objective fuel|time|balanced|simplest --autowarp --warpcap W --until-done] [--menu N] [--system N] [--cryo N|near] [--map N|near [--jump]] [--stars] [--mapzoom Z] [--play] [--angle DEG] [--headlock] [--avatars] [--talk vendor|pilot|trade] [--colony] [--jobs] [--orbit ALT [--orbit-go]] [--title home|new|load|save|settings|controls|sound] [--nebulae] [--skim] [--doom --until-dead] [--warp I] [--trace] [--focus NAME] [--zoom Z] [--time T] [--turn ±1]`
+`--screenshot out.png [--frames N] [--panel] [--overview] [--burn] [--flyby] [--node T,PRO,RAD] [--execute] [--dest NAME --objective fuel|time|balanced|simplest --autowarp --warpcap W --until-done] [--menu N] [--system N] [--cryo N|near] [--map N|near [--jump]] [--stars] [--mapzoom Z] [--play] [--angle DEG] [--headlock] [--avatars] [--talk vendor|pilot|trade] [--colony] [--jobs] [--orbit ALT [--orbit-go]] [--title home|new|load|save|settings|controls|sound] [--nebulae] [--skim] [--doom --until-dead] [--inside] [--hull NAME] [--crew-days N] [--warp I] [--trace] [--focus NAME] [--zoom Z] [--time T] [--turn ±1]`
 renders and exits.

@@ -33,6 +33,7 @@ Tuning :: struct {
 	price_curve_k:        f32, // max price swing between empty and flooded markets (§6.2)
 	skim_cycle_hours:     f32, // game hours the scoop takes per pass through a nebula (§2.6)
 	dust_hull_hours:      f32, // hours to lose a whole hull in the thickest ordinary gas
+	crew_xp_rate:         f32, // multiplier on how fast crew level up at their posts (§5.9)
 }
 
 tuning := Tuning {
@@ -49,6 +50,7 @@ tuning := Tuning {
 	price_curve_k        = 4,
 	skim_cycle_hours     = 2,
 	dust_hull_hours      = 150,
+	crew_xp_rate         = 1,
 }
 
 // Debug draw toggles; not gameplay.

@@ -69,6 +69,7 @@ Hud_View :: struct {
 	pos, vel:   [2]f64, // ship, relative to the primary
 	hull:       f64,    // 0..1; lights a caution lamp once it is not whole
 	hazard:     string, // "" when the hull is safe; lights the frame
+	repairing:  bool,   // an engineer is bringing the hull back
 	dead:       bool,
 }
 
@@ -98,6 +99,7 @@ hud_draw :: proc(v: Hud_View) -> (hot: bool) {
 	lamps := [?]Hud_Lamp {
 		{v.hold == "" ? "" : fmt.tprintf("HOLD %s", v.hold), v.hold != "", HUD_CYAN},
 		{fmt.tprintf("HULL %.0f%%", v.hull * 100), v.hull < 0.995, v.hull < 0.5 ? HUD_RED : HUD_AMBER},
+		{"REPAIR", v.repairing, HUD_GREEN},
 		{"AUTOBURN", v.autoburn, HUD_AMBER},
 		{"ARMED", v.armed, HUD_AMBER},
 		{v.hazard, v.hazard != "", HUD_RED},

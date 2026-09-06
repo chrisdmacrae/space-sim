@@ -665,6 +665,48 @@ are 1.8–3× that estimate. The player holds at most three; arriving at the
 destination with the goods completes a job; a passed deadline fails it.
 Held contracts are saved; boards regenerate from (system, market, day).
 
+### 5.9 Crew and ship systems
+
+The ship carries people, and the people run it (`src/crew`). Each hull has
+a number of bunks (`crew.BUNKS`: Courier 2, Hauler 3, Clipper 3, Sleeper 4,
+Freighter 5) and each crew member has a trade they were hired for and a
+level, 1 to 5, in every ship system. Three systems exist so far, each with
+a room on the deck:
+
+| system | room | what the post does |
+|---|---|---|
+| Engineering | engineering, at the stern | hull management: restores hull under way (1%/h per level) and heads off part of hazard damage (8% per level) |
+| Navigation | the bridge | propellant management: exhaust velocity is stretched 5% per level, so every burn spends less |
+| Comms | the comms room | talks prices down: 2% per level off what you pay and onto what you are paid, at markets, over the shuttle and with pilots |
+
+Levels come from **hours of duty** on a system (`Member.xp`), not from
+anything else. `roster_work` adds the game seconds that passed each frame
+to whoever is posted; thresholds sit at 0, 48, 192, 480 and 1080 hours
+(`LEVEL_HOURS`), a specialist earns them half again as fast in their own
+trade and starts at level 2 there. Cryo is not active time: the transit
+loop never calls `roster_work`, so nobody learns anything asleep. The
+knob `crew_xp_rate` scales the whole thing.
+
+Staffing (`staff_level`): the best level posted to a system, plus half a
+level for every extra hand, capped at 5; an unstaffed system does nothing.
+`effects` turns that into the numbers the ship uses each frame:
+`Ship.repair_rate`, `Ship.shield` and `Ship.ve_bonus` are written by
+`crew_update` (crew_game.odin) and read by `hazards.odin` and `ve_eff`;
+the trade edge is applied in `apply_trade`, the shuttle and `pilot_offer`.
+
+Crew are hired at stations (`candidates`: three seeded faces per station
+per week, a fee by level) and put ashore there; a refit to a hull with
+fewer bunks puts the last aboard ashore. The roster is saved as seeds,
+postings and hours (`save.Crew_Save`); names and faces come back from the
+seed. The deck plan (`deck.odin`) is data per class: a corridor down the
+spine, engineering at the stern, the bridge at the bow, the rest either
+side, each room with a door, standing spots and furniture drawn from
+`assets/crew/deck.fart`. `walk.odin` moves the crew about it on the wall
+clock: the posted stand their room and take breaks in the galley or the
+quarters; the off-duty wander. It is a diorama, nothing in it feeds back
+into the sim. `ui/ship_view.odin` draws it (View > Inside the ship, `I`,
+or Go inside on the ship's card).
+
 ---
 
 ## 6. Economy

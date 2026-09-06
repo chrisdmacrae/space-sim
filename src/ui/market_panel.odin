@@ -23,6 +23,7 @@ Market_View :: struct {
 	cargo_cap: f64,
 	credits:   f64,
 	propellant_pct: f64,
+	edge:      f64, // comms: fraction off what you pay and onto what you are paid
 	// The person selling: face, name and their line for this visit.
 	lib:         ^art.Library,
 	vendor:      render.Avatar,
@@ -95,8 +96,8 @@ market_panel_draw :: proc(v: Market_View, open: ^bool) -> (trade: Trade, did: bo
 	}
 	for c in econ.Commodity {
 		stock := v.market.stock[c]
-		bp := econ.buy_price(v.market, c)
-		sp := econ.sell_price(v.market, c)
+		bp := econ.buy_price(v.market, c) * (1 - v.edge)
+		sp := econ.sell_price(v.market, c) * (1 + v.edge)
 		have := v.cargo[int(c)]
 		ratio := v.market.target[c] > 0 ? stock / v.market.target[c] : 1
 		col := TEXT_MAIN
@@ -115,6 +116,7 @@ market_panel_draw :: proc(v: Market_View, open: ^bool) -> (trade: Trade, did: bo
 		if btn({x + cols[6] + 54, y - 2, 26, 18}, "-10", mouse, can_sell) { trade = {c, -10}; did = true }
 		y += 22
 	}
-	text.draw("Orange: scarce here (sells high). Green: glut (buys cheap). Prices move with every trade.", i32(x), i32(y + 6), 12, TEXT_DIM)
+	if v.edge > 0 do text.draw(fmt.ctprintf("Orange: scarce (sells high). Green: glut (buys cheap). Your comms officer has talked every price %.0f%% your way.", v.edge * 100), i32(x), i32(y + 6), 12, TEXT_DIM)
+	else do text.draw("Orange: scarce here (sells high). Green: glut (buys cheap). Prices move with every trade.", i32(x), i32(y + 6), 12, TEXT_DIM)
 	return
 }

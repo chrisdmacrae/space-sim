@@ -343,7 +343,7 @@ safe_radius :: proc(sys: ^gen.System, h: gen.Body_Handle) -> f64 {
 // Propellant left after spending dv from the current mass.
 propellant_after :: proc(s: ^Ship, dv: f64) -> f64 {
 	m0 := mass(s)
-	m1 := m0 * math.exp(-dv / s.stats.ve)
+	m1 := m0 * math.exp(-dv / ve_eff(s))
 	return s.propellant - (m0 - m1)
 }
 
@@ -1159,7 +1159,7 @@ dodge_now :: proc(sys: ^gen.System, s: ^Ship, t_now: f64) -> bool {
 			if _, still := predicts_impact(segs[:], t_now + DODGE_HORIZON); still do continue
 			if mag > dv_remaining(s) do return false
 			m0 := mass(s)
-			s.propellant = max(s.propellant - m0 * (1 - math.exp(-mag / s.stats.ve)), 0)
+			s.propellant = max(s.propellant - m0 * (1 - math.exp(-mag / ve_eff(s))), 0)
 			s.burned_dv += mag
 			s.orbit = orbit.from_state(pos, nv, mu, t_now)
 			clear(&s.nodes)

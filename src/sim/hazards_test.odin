@@ -99,3 +99,52 @@ pulsar_wind_wears_the_hull_slowly :: proc(t: ^testing.T) {
 	update(&sys, &s, 0, core.SECONDS_PER_HOUR)
 	testing.expect(t, s.hull == before && s.hazard == .None, "outside the wind nothing happens")
 }
+
+@(test)
+engineers_repair_the_hull_and_soften_hazards :: proc(t: ^testing.T) {
+	seed := find_seed(.Main_Sequence)
+	sys := gen.generate(seed)
+	defer gen.destroy(&sys)
+	// Under way and clear of hazards, a repair rate brings the hull back, and stops at whole.
+	s := spawn_in_orbit(&sys, gen.STAR, 0.3, 0)
+	defer destroy(&s)
+	s.hull = 0.5
+	s.repair_rate = 0.02 / core.SECONDS_PER_HOUR
+	update(&sys, &s, 0, core.SECONDS_PER_HOUR)
+	testing.expectf(t, abs(s.hull - 0.52) < 1e-6, "two percent back in an hour (%v)", s.hull)
+	for i in 1 ..< 40 do update(&sys, &s, f64(i) * core.SECONDS_PER_HOUR, core.SECONDS_PER_HOUR)
+	testing.expectf(t, s.hull == 1, "never past whole (%v)", s.hull)
+	// Docked, the work goes on too.
+	d := spawn_in_orbit(&sys, gen.STAR, 0.3, 0)
+	defer destroy(&d)
+	d.mode = .Docked
+	d.docked_ship = true
+	d.hull = 0.4
+	d.repair_rate = 0.01 / core.SECONDS_PER_HOUR
+	apply_hazards(&sys, &d, 0, core.SECONDS_PER_HOUR)
+	testing.expectf(t, abs(d.hull - 0.41) < 1e-6, "repairs at a berth (%v)", d.hull)
+	// Inside the heat line a shield heads off its share of the damage.
+	bare := spawn_in_orbit(&sys, gen.STAR, 0.3, 0)
+	defer destroy(&bare)
+	shielded := spawn_in_orbit(&sys, gen.STAR, 0.3, 0)
+	defer destroy(&shielded)
+	for ship in ([]^Ship{&bare, &shielded}) {
+		ship.orbit = orbit.circular(sys.bodies[0].mu, sys.star.heat_radius * 0.8, 0, 0, 1)
+		ship.pos, ship.vel = orbit.state_at(ship.orbit, 0)
+		repredict(&sys, ship, 0)
+	}
+	shielded.shield = 0.4
+	update(&sys, &bare, 0, 600)
+	update(&sys, &shielded, 0, 600)
+	lost_bare := 1 - bare.hull
+	lost_shielded := 1 - shielded.hull
+	testing.expectf(t, lost_bare > 0 && abs(lost_shielded - lost_bare * 0.6) < 1e-6, "forty percent of the damage headed off (%v vs %v)", lost_shielded, lost_bare)
+	testing.expect(t, shielded.hazard == .Heat && shielded.hazard_rate < bare.hazard_rate, "the reported rate is the softened one")
+	// A navigator stretches the exhaust velocity: more Δv from the same tank.
+	plain := spawn_in_orbit(&sys, gen.STAR, 0.3, 0)
+	defer destroy(&plain)
+	dv0 := dv_remaining(&plain)
+	plain.ve_bonus = 1.25
+	testing.expectf(t, abs(dv_remaining(&plain) - dv0 * 1.25) < 1e-9, "a quarter more Δv at 1.25 (%v vs %v)", dv_remaining(&plain), dv0)
+	testing.expect(t, ve_eff(&s) == s.stats.ve, "no bonus reads as nominal")
+}

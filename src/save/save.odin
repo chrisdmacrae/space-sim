@@ -13,6 +13,7 @@ import econ "sim:econ"
 import gen "sim:gen"
 import orbit "sim:orbit"
 import sim "sim:sim"
+import crew "sim:crew"
 
 Market_Save :: struct {
 	stock:    [len(econ.Commodity)]f64,
@@ -39,6 +40,15 @@ Ship_Save :: struct {
 	hull:       f64,
 }
 
+// One crew member: who they are and what they have learned. The face and
+// the name come back from the seed; the posting and the hours are the delta.
+Crew_Save :: struct {
+	seed:        u64,
+	specialty:   crew.System,
+	post:        crew.Post,
+	xp:          [len(crew.System)]f64,
+}
+
 Save :: struct {
 	version: int,
 	seed:    u64,
@@ -49,6 +59,7 @@ Save :: struct {
 	ship:    Ship_Save,
 	systems: []System_Save,
 	contracts: []econ.Job, // jobs the player holds
+	crew:      []Crew_Save, // empty in older saves: the starting crew is rolled again
 	// Slot card details, so a listing does not have to rebuild anything.
 	system_name: string,
 	saved_at:    i64, // unix seconds
@@ -90,7 +101,7 @@ list_slots :: proc(allocator := context.temp_allocator) -> (out: [SLOTS + 1]Slot
 	return
 }
 
-capture :: proc(seed: u64, t: f64, current: int, credits: f64, s: ^sim.Ship, ge: ^econ.Galaxy_Econ, params: gen.Galaxy_Params = {}, system_name := "", contracts: []econ.Job = nil, allocator := context.temp_allocator) -> Save {
+capture :: proc(seed: u64, t: f64, current: int, credits: f64, s: ^sim.Ship, ge: ^econ.Galaxy_Econ, params: gen.Galaxy_Params = {}, system_name := "", contracts: []econ.Job = nil, roster: ^crew.Roster = nil, allocator := context.temp_allocator) -> Save {
 	sv := Save{version = VERSION, seed = seed, params = params, t = t, current = current, credits = credits, system_name = system_name, saved_at = time.time_to_unix(time.now()), contracts = contracts}
 	sv.ship = Ship_Save {
 		class = s.class, primary = int(s.primary), mode = s.docked_ship ? .On_Rails : s.mode, orbit = s.orbit, pos = s.pos, vel = s.vel,
@@ -110,7 +121,28 @@ capture :: proc(seed: u64, t: f64, current: int, credits: f64, s: ^sim.Ship, ge:
 		append(&systems, System_Save{index = i, last_t = se.last_t, markets = ms})
 	}
 	sv.systems = systems[:]
+	if roster != nil {
+		cs := make([]Crew_Save, len(roster.members), allocator)
+		for &m, i in roster.members {
+			cs[i] = Crew_Save{seed = m.seed, specialty = m.specialty, post = m.post}
+			for sys in crew.System do cs[i].xp[int(sys)] = m.xp[sys]
+		}
+		sv.crew = cs
+	}
 	return sv
+}
+
+// Bring the saved crew aboard in place of the rolled one. Older saves have
+// none; then the starting crew stays.
+apply_crew :: proc(sv: Save, roster: ^crew.Roster) {
+	if len(sv.crew) == 0 do return
+	crew.roster_clear(roster)
+	for cs in sv.crew {
+		m := crew.make_member(cs.seed, cs.specialty)
+		m.post = cs.post
+		for sys in crew.System do m.xp[sys] = cs.xp[int(sys)]
+		append(&roster.members, m)
+	}
 }
 
 write :: proc(path: string, sv: Save) -> bool {

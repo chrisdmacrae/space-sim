@@ -64,6 +64,7 @@ Action :: enum u8 {
 	Skip_Burn,
 	Skip_Arrival,
 	Galaxy_Map,
+	Ship_Interior,
 	Save_Game,
 	Load_Game,
 	Save_Slots,
@@ -155,6 +156,7 @@ VIEW_ITEMS := [?]Item {
 	I("Reset view rotation", .Rotate_Reset, .Rotate_Reset),
 	I("Lock view to ship heading", .Toggle_Heading_Lock, .Heading_Lock),
 	SEP,
+	I("Inside the ship (crew)", .Ship_Interior, .Ship_Interior),
 	I("Galaxy map", .Galaxy_Map, .Galaxy_Map),
 }
 TRADE_ITEMS := [?]Item {
@@ -237,7 +239,7 @@ checked :: proc(a: Action, info: Bar_Info) -> (is_toggle, on: bool) {
 	case .None, .Throttle_Full, .Cut_Engine, .Hold_Prograde, .Hold_Retrograde, .Hold_Release,
 	     .Node_Add, .Node_Remove, .Warp_To_Burn, .Execute_Burn, .Plan_Course, .Fly_To_Point, .Cancel_Autopilot, .Dock, .Undock,
 	     .Warp_Down, .Warp_Up, .Tick_1s, .Tick_1m, .Tick_10m, .Tick_30m, .Tick_1h, .Tick_1d, .Tick_1mo, .Tick_1y,
-	     .Frame_System, .Cycle_Focus, .Regen, .Seed_Next, .Seed_Prev, .Toggle_Debug, .Market_Window, .Routes_Window, .Shipyard_Window, .Galaxy_Map, .Save_Game, .Load_Game, .Save_Slots, .Load_Slots, .Settings, .Main_Menu, .Rotate_Reset, .Jobs_Window, .Skip_Burn, .Skip_Arrival, .Go, .Orbit_At:
+	     .Frame_System, .Cycle_Focus, .Regen, .Seed_Next, .Seed_Prev, .Toggle_Debug, .Market_Window, .Routes_Window, .Shipyard_Window, .Galaxy_Map, .Ship_Interior, .Save_Game, .Load_Game, .Save_Slots, .Load_Slots, .Settings, .Main_Menu, .Rotate_Reset, .Jobs_Window, .Skip_Burn, .Skip_Arrival, .Go, .Orbit_At:
 	}
 	return false, false
 }

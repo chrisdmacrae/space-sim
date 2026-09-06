@@ -87,7 +87,9 @@ cargo_total :: proc(c: Cargo) -> (n: f64) {
 
 // Advance the shuttle. Time only passes while the ship is in range; away
 // from the body the shuttle waits where it is.
-shuttle_step :: proc(sys: ^gen.System, e: ^econ.Economy, s: ^Ship, sh: ^Shuttle, credits: ^f64, dt: f64) {
+// `edge` is the comms officer's: a fraction off what the colony charges and
+// onto what it pays (crew, docs/DESIGN.md §5.9).
+shuttle_step :: proc(sys: ^gen.System, e: ^econ.Economy, s: ^Ship, sh: ^Shuttle, credits: ^f64, dt: f64, edge: f64 = 0) {
 	if sh.market < 0 || sh.market >= len(e.markets) do return
 	if !at_colony(sys, s, sh.body) do return
 	m := &e.markets[sh.market]
@@ -121,6 +123,7 @@ shuttle_step :: proc(sys: ^gen.System, e: ^econ.Economy, s: ^Ship, sh: ^Shuttle,
 			i := int(c)
 			if sh.carrying[i] <= 0 do continue
 			_, rev := econ.sell(m, c, sh.carrying[i])
+			rev *= 1 + edge
 			credits^ += rev
 			sh.earned += rev
 			sh.carrying[i] = 0
@@ -130,7 +133,8 @@ shuttle_step :: proc(sys: ^gen.System, e: ^econ.Economy, s: ^Ship, sh: ^Shuttle,
 			i := int(c)
 			if sh.orders[i] <= 0 || room <= 0 do continue
 			want := min(sh.orders[i], room)
-			moved, cost := econ.buy(m, c, want, credits^)
+			moved, cost := econ.buy(m, c, want, credits^ / (1 - edge))
+			cost *= 1 - edge
 			if moved <= 0 {
 				sh.orders[i] = 0 // out of stock or out of credits: drop it
 				continue

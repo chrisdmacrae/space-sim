@@ -73,6 +73,16 @@ Ship :: struct {
 	dust_hardened: bool,           // survey hulls shrug off nebula dust (hazards.odin)
 	hazard:      Hazard,           // what is hurting the ship right now
 	hazard_rate: f64,              // hull lost per second from it
+	// What the crew do for the ship (set by the game from crew.effects each frame).
+	repair_rate: f64,              // hull restored per second while under way
+	shield:      f64,              // fraction of hazard damage headed off, 0..1
+	ve_bonus:    f64,              // multiplier on exhaust velocity; 0 means nominal
+}
+
+// Exhaust velocity as flown: the engine's, stretched by however well the
+// navigator manages the burn (docs/DESIGN.md §5.9).
+ve_eff :: proc(s: ^Ship) -> f64 {
+	return s.ve_bonus > 0 ? s.stats.ve * s.ve_bonus : s.stats.ve
 }
 
 cargo_used :: proc(s: ^Ship) -> f64 {
@@ -212,7 +222,7 @@ mass :: proc(s: ^Ship) -> f64 {
 
 dv_remaining :: proc(s: ^Ship) -> f64 {
 	dry := s.stats.mass_dry + cargo_used(s) * CARGO_UNIT_MASS
-	return s.stats.ve * math.ln(mass(s) / dry)
+	return ve_eff(s) * math.ln(mass(s) / dry)
 }
 
 // Circular orbit around a body at a fraction of its sphere of influence.
@@ -372,7 +382,7 @@ update :: proc(sys: ^gen.System, s: ^Ship, t0, dt: f64) {
 				pos, vel := orbit.state_at(s.orbit, n.t)
 				dv := node_dv_world(n, pos, vel)
 				m0 := mass(s)
-				s.propellant = max(s.propellant - m0 * (1 - math.exp(-node_dv(n) / s.stats.ve)), 0)
+				s.propellant = max(s.propellant - m0 * (1 - math.exp(-node_dv(n) / ve_eff(s))), 0)
 				s.burned_dv += node_dv(n)
 				s.orbit = orbit.from_state(pos, vel + dv, sys.bodies[s.primary].mu, n.t)
 				ordered_remove(&s.nodes, i)
@@ -507,7 +517,7 @@ integrate :: proc(sys: ^gen.System, s: ^Ship, t0, t_end: f64) {
 		s.pos += s.vel * h + a0 * (0.5 * h * h)
 		a1 := gravity(s.pos, mu) + acc_t
 		s.vel += (a0 + a1) * (0.5 * h)
-		s.propellant = max(s.propellant - s.throttle * s.stats.thrust / s.stats.ve * h, 0)
+		s.propellant = max(s.propellant - s.throttle * s.stats.thrust / ve_eff(s) * h, 0)
 		t += h
 		if check_transitions(sys, s, t) do return
 	}

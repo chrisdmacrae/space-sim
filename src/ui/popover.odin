@@ -24,6 +24,7 @@ Pop_Action :: enum u8 {
 	Orbit_At, // orbit this body at a chosen altitude
 	Skim,     // put the scoop out in this nebula
 	Skim_Stop,
+	Inside,   // open the deck plan of your own ship
 }
 
 Pop_Button :: struct {
