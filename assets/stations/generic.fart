@@ -1,0 +1,15 @@
+{
+  "version": 1, "name": "station",
+  "palette": [
+    {"name": "station",        "rgb": [190, 196, 205, 255]},
+    {"name": "station_dark",   "rgb": [104, 112, 126, 255]},
+    {"name": "station_accent", "rgb": [232, 122, 58, 255]}
+  ],
+  "parts": [{"name": "frame", "pivot": [0, 0], "shapes": [
+    {"kind": "line", "color": "station_dark", "a": [-2.4, 0], "b": [2.4, 0], "w": 0.5},
+    {"kind": "line", "color": "station_dark", "a": [0, -2.4], "b": [0, 2.4], "w": 0.5},
+    {"kind": "poly", "color": "station", "points": [[0, -1.5], [1.5, 0], [0, 1.5], [-1.5, 0]], "tris": [0, 1, 2, 0, 2, 3]},
+    {"kind": "circle", "color": "station_accent", "at": [0, 0], "r": 0.55}
+  ]}],
+  "states": []
+}

@@ -1,0 +1,1 @@
+{"version":1,"name":"nose","palette_refs":["../palettes/avatar.fart"],"parts":[{"name":"nose","pivot":[0,0],"shapes":[{"kind":"line","color":"skin_shade","a":[-0.5,-2.2],"b":[-1.3,1.8],"w":0.75},{"kind":"line","color":"skin_shade","a":[-1.3,1.8],"b":[1.4,2.2],"w":0.75}]}],"states":[{"name":"idle","parts":[{"part":"nose"}]}]}

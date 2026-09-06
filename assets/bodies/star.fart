@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "name": "star",
+  "palette_refs": [
+    "../palettes/base.fart"
+  ],
+  "parts": [
+    {
+      "name": "halo",
+      "pivot": [
+        0,
+        0
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "color": "star_halo",
+          "at": [
+            0,
+            0
+          ],
+          "r": 2.4
+        },
+        {
+          "kind": "circle",
+          "color": "star_glow",
+          "at": [
+            0,
+            0
+          ],
+          "r": 1.45
+        }
+      ]
+    },
+    {
+      "name": "core",
+      "pivot": [
+        0,
+        0
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "color": "star_core",
+          "at": [
+            0,
+            0
+          ],
+          "r": 1.0
+        },
+        {
+          "kind": "circle",
+          "color": "star_hot",
+          "at": [
+            -0.15,
+            -0.15
+          ],
+          "r": 0.55
+        }
+      ]
+    }
+  ],
+  "states": [
+    {
+      "name": "core_only",
+      "parts": [
+        {
+          "part": "core"
+        }
+      ]
+    }
+  ]
+}

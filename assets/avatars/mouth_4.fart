@@ -1,0 +1,1 @@
+{"version":1,"name":"mouth","palette_refs":["../palettes/avatar.fart"],"parts":[{"name":"mouth","pivot":[0,0],"shapes":[{"kind":"line","color":"mouth","a":[-1.6,6],"b":[1.6,6],"w":1.3},{"kind":"circle","color":"skin_shade","at":[0,6],"r":0.5}]}],"states":[{"name":"idle","parts":[{"part":"mouth"}]}]}

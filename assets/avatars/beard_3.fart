@@ -1,0 +1,1 @@
+{"version":1,"name":"beard","palette_refs":["../palettes/avatar.fart"],"parts":[{"name":"beard","pivot":[0,0],"shapes":[{"kind":"poly","color":"hair","points":[[-2.6,7.2],[2.6,7.2],[2,11.8],[-2,11.8]],"tris":[3,0,1,1,2,3]},{"kind":"line","color":"hair","a":[-3,4.6],"b":[3,4.6],"w":0.9}]}],"states":[{"name":"idle","parts":[{"part":"beard"}]}]}

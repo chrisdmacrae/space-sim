@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "name": "fastart_icon",
+  "palette": [
+    {"name": "icon_circle", "rgb": [232, 122,  58, 255]},
+    {"name": "icon_line",   "rgb": [122, 204, 240, 255]},
+    {"name": "icon_tri",    "rgb": [190, 196, 205, 255]}
+  ],
+  "parts": [
+    {
+      "name": "glyph",
+      "pivot": [0, 0],
+      "shapes": [
+        {"kind": "poly",   "color": "icon_tri",    "points": [[1.5, -7], [7, 2], [-4, 2]], "tris": [0, 1, 2]},
+        {"kind": "circle", "color": "icon_circle", "at": [-3.5, -2.5], "r": 3.2},
+        {"kind": "line",   "color": "icon_line",   "a": [-6, 5.5], "b": [6, 5.5], "w": 2.2}
+      ]
+    }
+  ],
+  "states": []
+}

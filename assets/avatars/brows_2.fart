@@ -1,0 +1,1 @@
+{"version":1,"name":"brows","palette_refs":["../palettes/avatar.fart"],"parts":[{"name":"brows","pivot":[0,0],"shapes":[{"kind":"line","color":"hair","a":[-1.8,-7.6],"b":[-7.2,-6.2],"w":1.2},{"kind":"line","color":"hair","a":[1.8,-7.6],"b":[7.2,-6.2],"w":1.2}]}],"states":[{"name":"idle","parts":[{"part":"brows"}]}]}

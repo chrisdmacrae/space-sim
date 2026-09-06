@@ -1,0 +1,1 @@
+{"version":1,"name":"extra","palette_refs":["../palettes/avatar.fart"],"parts":[{"name":"extra","pivot":[0,0],"shapes":[{"kind":"circle","color":"accent","at":[11.4,1.6],"r":0.7},{"kind":"circle","color":"accent","at":[-11.4,1.6],"r":0.7}]}],"states":[{"name":"idle","parts":[{"part":"extra"}]}]}

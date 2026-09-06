@@ -1,0 +1,1666 @@
+{
+ "lines": [
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "What. I'm busy. Say it quick."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "You docked without so much as a hello. Fine. Talk."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "{name}. This is my ship. Mind the deck plates."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Another {hull} pilot with time to burn. Well, I don't have any. Make it count."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Hey! Company out here, what are the odds. {name}, pleased to meet you."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Welcome aboard the {ship}! Watch the third rung, it bites. I'm {name}."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Oh, a visitor! I was talking to the nav computer again. It never answers. Sit, sit."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "You picked a good day, I just brewed something that is nearly coffee."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "You're not... you're not with the collections office, are you? No? Good. Good. {name}."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I saw you coming for hours. Kept thinking, what do they want. So. What do you want?"
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Please don't touch anything. Half of it is held together with tape and hope."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Hello. Hi. Sorry. I don't get many people docking. Is something wrong with my orbit?"
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Captain. {name}, master of the {ship}. State your business and be welcome."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Permission to come aboard was granted; I trust the transfer was smooth."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Good day. We keep a tidy ship here. I would ask you to do the same."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "You have the courtesy to match velocities properly. That already puts you ahead of most."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Well now. A {hull} that can actually rendezvous. You're either good or lucky. Which is it?"
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "{name}. Don't believe anything the other pilots say about me. Most of it, anyway."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Come in. Mind the crate by the hatch. Don't ask what's in it."
+  },
+  {
+   "cat": "greeting",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "A visitor. I'll assume you want something. Everyone does. Let's see if it's something I've got."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "Prices are on the board. I don't do discounts and I don't do stories."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "{station} market. Buy, sell, or get out of the queue."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "You want {want}? Everybody wants {want}. Get in line."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "The scales are honest. That's more than I can say for the last three captains through here."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "Welcome to {station}! Best stock in {system}, and I'd say that even if it weren't true."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "A new face! Come look at the boards, we got a shipment in and the {glut} is practically free."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "Sit down, have a look, nobody leaves {station} without at least a story."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "You look like someone who needs {want} and I look like someone who wishes she had it. Let's talk anyway."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "Oh. Hello. The, um, the manifest is right here. Everything's counted. Twice."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "Welcome. Please don't lean on the counter, the last one collapsed."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "If you're here about the {glut} shipment, I swear I didn't order that much."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "Hello! Sorry. Quiet shift. I jump at every hatch cycle."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "{station} exchange. {name}, at your service. The current tariffs are posted."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "Good day, captain. We trade at the listed rates and settle on the spot."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "Welcome to {station}. Our books are open to any captain in good standing."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "You'll find our prices fair and our scales calibrated this morning."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "Ah, a captain with credits. I can always tell. {name}. What can I part you from?"
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "Everything's for sale at {station}. Some of it's even on the manifest."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "Come in, come in. The prices on the board are for people who don't ask nicely."
+  },
+  {
+   "cat": "greeting",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "Between us, the {want} price is going to climb. I'd act before the next ship docks."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "gruff",
+   "text": "Weather? There's no weather. There's vacuum and there's the {star}. Pick one."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "gruff",
+   "text": "I've been flying since before your hull was a spreadsheet."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "gruff",
+   "text": "Talk is cheap. Propellant isn't."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "gruff",
+   "text": "{system}. Same rocks, same prices, same complaints. Suits me."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "gruff",
+   "text": "You want conversation, buy a radio drama."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "gruff",
+   "text": "The one thing I miss about planets is that things stay where you put them."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Have you seen {system} from the outer edge? The {star} looks like a coin someone dropped."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "I name every ship I meet. Yours is definitely a Gerald."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "My grandmother said never trust a pilot who doesn't hum. I hum constantly."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Long orbits are the best part. Nothing to do but think and eat the good rations first."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Did you know {nearby} has a station that plays music over the docking channel? Awful music. I love it."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "I keep a plant in the cockpit. It's doing better than I am."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "nervous",
+   "text": "Do you ever hear the hull tick? It's just thermal. It's definitely just thermal."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "nervous",
+   "text": "I checked the periapsis four times before you docked. It's fine. It's fine."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "nervous",
+   "text": "They say the {star} has been quiet lately. Quiet is good. Quiet is when things build up."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "nervous",
+   "text": "I don't sleep at warp. Everyone says it's safe. Everyone said a lot of things."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "nervous",
+   "text": "Sorry, I talk fast when I'm docked. Undocked I don't talk at all."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "nervous",
+   "text": "Is your hull rated for {star} systems? Mine says it is. It says a lot of things."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "formal",
+   "text": "A well-kept orbit is the mark of a well-kept mind, my instructor used to say."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "formal",
+   "text": "I log every burn. Not because anyone reads it. Because I would know if I didn't."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "formal",
+   "text": "{system} is a respectable system. The tariffs are predictable, which is all one can ask."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "formal",
+   "text": "The {star} here throws a hard glare on approach. Do mind your heat line."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "formal",
+   "text": "I have flown {nearby} to {system} more times than I care to count. It never gets shorter."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "formal",
+   "text": "One learns patience out here or one learns nothing."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "sly",
+   "text": "Every pilot has a story about a slingshot that nearly killed them. Mine's better. It nearly killed someone else."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "sly",
+   "text": "Rules of the lane: keep your Δv, keep your mouth shut, keep a spare hatch key."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "sly",
+   "text": "I don't gamble. I invest in outcomes I already know."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "sly",
+   "text": "You'd be amazed what people leave in docking bays. I have a collection."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "sly",
+   "text": "The trick in {system} is to be leaving when everyone else is arriving."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "sly",
+   "text": "Between you and me, the customs scans at {station} only look at the top crate."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "any",
+   "text": "Lot of traffic through {system} lately. Or maybe I'm just noticing it more."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "any",
+   "text": "How's the {hull} treating you? Mine rattles above half throttle."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "any",
+   "text": "You ever count the stars on a long coast? I get to about two hundred and give up."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "any",
+   "mood": "any",
+   "text": "They keep saying they'll fix the beacons out past {nearby}. They keep not doing it."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "{commodity} is going for {dest_price} at {dest}. Don't tell me you didn't hear it from me."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "{origin} is drowning in {commodity}. That's why I've got a hold full of it."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "{dest} pays. That's the whole rumour."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Oh! {dest} is paying {dest_price} for {commodity} right now. That's why I'm grinning."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Word is {nearby} has been short of everything since a freighter went missing. Sad, but, you know. Prices."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Everyone's running {commodity} out of {origin} this week. Get in before it's a glut!"
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I heard... I heard {dest} is paying {dest_price} for {commodity}. Don't crowd me on it. Please."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Someone said the heat line at the {star} is wider than the charts say. I gave it extra room."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "There's talk of a shortage at {nearby}. Talk. Just talk. Probably."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "For your information: {dest} is currently offering {dest_price} per unit of {commodity}."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "{origin} is oversupplied with {commodity}. It will not last, but it is true today."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "{nearby} has raised its tariffs again, I am told. Plan accordingly."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "A little bird says {dest} pays {dest_price} for {commodity}. The bird wants a finder's fee."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Buy {commodity} at {origin} and sell it at {dest}. Or don't. More for me."
+  },
+  {
+   "cat": "rumour",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "There's a shipyard in {nearby} selling hulls below cost. Ask me how I know. Actually, don't."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "We're short of {want}. Bring some and I'll pay. That's not a rumour, that's the board."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "Too much {glut} in the back. Take it off my hands and I'll remember you."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "{nearby}'s prices are a joke. Ours aren't."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "We are desperate for {want}! Desperate! I'd sell my chair for a hold of it."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "Pilots keep coming in from {nearby} saying it's booming over there. Booming!"
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "The {glut} is cheap this week. Cheap cheap. Fill your hold and thank me later."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "We're running low on {want}. If someone doesn't bring some soon I have to explain it upstairs."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "I heard a ship broke up near the {star}. Nobody official said anything. That's what worries me."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "The {glut} keeps piling up. I don't know where it's coming from. I've stopped asking."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "{station} is currently under-supplied in {want}; sellers will find our rate generous."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "Reports from {nearby} suggest their markets have moved considerably. I would verify before committing."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "We hold a surplus of {glut}. Buyers may take advantage while it lasts."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "Bring {want}. I'll pay over the board and we'll both pretend I didn't."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "There's a captain who buys {glut} at {nearby} without checking the grade. Just saying."
+  },
+  {
+   "cat": "rumour",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "The board says one price. My cousin at {nearby} says another. One of us is lying."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "{units} units of {commodity}. Bought at {origin}, headed for {dest}. Any other questions?"
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Hold's full of {commodity}. It's not for admiring."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "It's {commodity}. Don't ask me what it's used for, ask me what it pays."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "{units} units of {commodity}! Beautiful stuff. Well, it's crates. But the numbers are beautiful."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Running {commodity} from {origin} to {dest}. It's not glamorous, but it's honest and it's mine."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "I've got {commodity} aboard and I've grown quite fond of it. Don't tell {dest}."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "It's {commodity}. Just {commodity}. {units} units. All properly stowed. I checked."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I'm carrying {commodity} to {dest}. If I make it. When I make it. I'll make it."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "It's {commodity}, from {origin}. Legitimately. I have the receipts. Do you want to see the receipts?"
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "The manifest reads {units} units of {commodity}, consigned to {dest}."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Just {commodity}, loaded at {origin}. A routine run. Routine is the goal."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "I carry {commodity}. The margins are modest and the risks are known. I prefer it so."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Cargo? {commodity}. Officially {units} units. The manifest and I have an understanding."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "A hold of {commodity} bound for {dest}, where they'll pay {dest_price} and never ask where it came from."
+  },
+  {
+   "cat": "cargo",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "What's in the hold is {commodity}. What's under the hold is none of your business."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "Short on {want}, long on {glut}. Same as the board says. Read the board."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "The market's the market. It doesn't care what you think of it and neither do I."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "gruff",
+   "text": "Prices move when ships dock. You docked. Congratulations, you moved them."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "We need {want} and we're swimming in {glut}. Bring one, take the other, everybody's happy!"
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "Trade's been lively! Three hulls this week. Well, two and a half. One of them barely counted."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "cheerful",
+   "text": "The trick is to buy the green and sell the orange. I made that up but it works."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "We're low on {want}. I keep telling them. They keep saying a ship is coming."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "The {glut} is going to spoil if nobody buys it. Can {glut} spoil? I should check."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "nervous",
+   "text": "Prices swing so fast here. I put a number up and it's wrong before the ink dries."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "{station} imports {want} and exports {glut}. Our rates reflect both."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "Every trade moves the price a little. Large lots move it a great deal. Plan your volumes."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "formal",
+   "text": "Our stock replenishes on the daily cycle. Patience is occasionally the cheaper option."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "Buy {glut} here, sell it where they're short. I'd tell you where, but that costs extra."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "The board's a suggestion. The real price is whatever the last captain was dumb enough to pay."
+  },
+  {
+   "cat": "market",
+   "who": "vendor",
+   "mood": "sly",
+   "text": "We want {want}. Badly. Try not to look like you know that when you sell it."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Fine. Dock. Don't scratch anything."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "You've got ten minutes of my patience. Clock's running."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Come alongside then. Slowly. I've seen how {hull} pilots park."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Yes! Absolutely! Hatch is cycling. Bring stories."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Dock away! I'll put the kettle on. It's a very small kettle."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "A guest! Come aboard, come aboard, mind the plant."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Okay. Okay. You can dock. Just... gently. Please."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I suppose it's fine. You don't look dangerous. You don't, do you?"
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Alright, hatch is open. I'm keeping the inner door locked though. No offence."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Docking approved. Match velocities within tolerance and proceed."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "You may come alongside. I will hold this orbit until you are clear."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Granted. Welcome aboard the {ship}."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Sure, dock. What could possibly go wrong."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Come aboard. Leave your assumptions at the hatch."
+  },
+  {
+   "cat": "dock_accept",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "I'll allow it. I'm curious what you think you'll find."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "No. Go dock with someone who cares."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Not today. Not tomorrow either, probably."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "I've got a schedule and it doesn't have you in it."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Back off. I don't take visitors mid-run."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "No! No, I mean, no thank you. Please keep your distance. Please."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I don't dock with strangers. I don't dock with friends either, I don't have any. Sorry."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Why do you want to dock? What did I do? Just, no. Not today."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "My hatch is... broken. Yes. Broken. Try another ship."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I'd rather not. You could be anyone. Anyone could be anyone."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Regrettably I must decline. My cargo is under bond and the hatch stays sealed."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Not at this time, captain. Perhaps at {dest}."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "I am not receiving visitors on this leg. Good day."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Tempting. But no. I like my orbit the way it is."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Dock? With you? I don't even know what you're carrying. That's usually my line."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Ask me again when I'm not carrying anything I'd have to explain."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Not today. Today I'm somebody else's problem."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "any",
+   "text": "Negative. Keep your distance."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "any",
+   "text": "Hatch is sealed. Try the station."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "any",
+   "text": "I'll pass. Nothing personal."
+  },
+  {
+   "cat": "dock_refuse",
+   "who": "pilot",
+   "mood": "any",
+   "text": "Not now. I'm burning in an hour and I want the lane clear."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "The {commodity} is {price} a unit. That's the number. It doesn't get smaller by staring."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "You want my {commodity}? {price} each. Or sell me some, I'll pay what {origin} pays, near enough."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Ooh, a deal! I've got {commodity} at {price}, and if you've got any yourself I'll buy it, hold permitting!"
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Let's trade! {commodity} at {price} a unit. I'd shake on it but my hands are covered in coolant."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I could sell some {commodity}. {price} each? Is that fair? I think that's fair. Tell me if it isn't. Actually don't."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "It's {price} per unit of {commodity}. I need to make {dest_price} at {dest} or I'm in trouble. More trouble."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "I can release {commodity} at {price} per unit, or purchase the same at a fair rate, within the limits of my hold."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "My terms: {commodity} at {price}. I do not haggle for sport, but I will hear an offer."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "It's {commodity}, {price} a unit. That's my friendly price. You should see my other one."
+  },
+  {
+   "cat": "trade_open",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "I'll sell {commodity} at {price}. I'll buy it too, if you're foolish enough to sell it to me here."
+  },
+  {
+   "cat": "trade_open_buy",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Hold's empty. I'll buy {commodity} at {price} if you've got it. Otherwise we're done here."
+  },
+  {
+   "cat": "trade_open_buy",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Nothing to sell, sorry! But I'm buying {commodity} at {price} a unit if you've got any spare."
+  },
+  {
+   "cat": "trade_open_buy",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I don't have anything aboard. I could buy {commodity} though? At {price}? If that's alright?"
+  },
+  {
+   "cat": "trade_open_buy",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "My hold is empty at present. I will purchase {commodity} at {price} per unit, within my means."
+  },
+  {
+   "cat": "trade_open_buy",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Empty hold. Funny how that happens. I'll take {commodity} off your hands at {price}, though."
+  },
+  {
+   "cat": "trade_open_buy",
+   "who": "pilot",
+   "mood": "any",
+   "text": "Nothing aboard to sell, but I'm buying {commodity} at {price}."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Fine. Take it. Don't tell anyone I went soft."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "You drive a hard bargain for someone with a hull that size. Done."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Alright, alright. Lower it is. Now buy something."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Oh go on then! For you. Because you asked nicely."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Deal! I was going to offer that anyway, I just like watching people ask."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Sure! What's a few credits between two people stuck in the same gravity well."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Yes, fine, okay, lower, just... don't leave without buying. Please."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I can do that. I think I can do that. Yes. Done."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Okay. Okay. A bit less. Just stop looking at the hatch like that."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "A reasonable request. I will adjust the price accordingly."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Agreed. Consider it a courtesy between professionals."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Very well. The revised rate stands for this conversation only."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Ha. Fine. I like you. That's going to cost me one day."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "You know what, yes. I'll make it back on the next fool."
+  },
+  {
+   "cat": "haggle_accept",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Lower it is. Remember this the next time I need a favour."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "No. The number's the number."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Do I look like a charity? Pay it or leave it."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "I've had this argument with better pilots than you. They lost too."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Aw, I wish I could! But {dest} is counting on me, and so is my rent."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "No can do, friend! But I'll throw in a story for free. Later. Maybe."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Sorry! Price stays. I'm cheerful, not stupid."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "I can't. I really can't. I've done the sums. Twice. Three times."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "If I go lower I don't make my margin and then I have to explain to... no. No. Sorry."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Please don't push. The price is the price. I'm not good at this."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "I must decline. The rate reflects my costs and my costs are not negotiable."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "The offer stands as made. I would not insult you with a worse one."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "No. But I appreciate the attempt was made politely."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Nice try. I've used that one myself."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Lower? Captain, this is already the price I give people I like."
+  },
+  {
+   "cat": "haggle_refuse",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "No. But ask again with a better hull and we'll see."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Done. Crates are yours. Get them off my deck."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Paid. Good. Now we're both busy."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "That's settled. Anything else, or can I get back to flying?"
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Wonderful! Pleasure doing business. I mean that. Mostly."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Deal done! I'll remember you as the {hull} with the good manners."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "Lovely. That's the hold lighter and my mood heavier. Wait. The other way round."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Okay. It's done. It went fine. See, it went fine."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Thank you. Really. Thank you. You can go now. Sorry. Not like that."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Transferred. Counted. Twice. We're good. We're good."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "The transfer is complete and recorded. A pleasure, captain."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Settled. I shall note the {hull} as a fair trading partner."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Concluded. May your margins be as clean as your docking."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Done. You got a good deal. Probably. I'd have to check."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "And that's that. If anyone asks, we never met."
+  },
+  {
+   "cat": "deal_done",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Pleasure. Now you owe me one, by the rules of the lane. I'll collect."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Then we're done talking about it."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "gruff",
+   "text": "Suit yourself. {dest} will take it."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "No worries! Maybe next orbit."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "cheerful",
+   "text": "That's alright. It was nice to have someone to not sell to."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Oh. Okay. That's fine. That's... yes. Fine."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "nervous",
+   "text": "Right. No deal. I'll just... keep it then. All of it."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "Understood. The offer remains open until I undock."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "formal",
+   "text": "As you wish. No harm done on either side."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Your loss. Or mine. Hard to say yet."
+  },
+  {
+   "cat": "no_deal",
+   "who": "pilot",
+   "mood": "sly",
+   "text": "Fine. I wasn't going to give you the good crates anyway."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "gruff",
+   "text": "Go on. Clear my lane."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "gruff",
+   "text": "Don't come back unless you're buying."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "gruff",
+   "text": "Right. Mind the {star} on your way out."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "gruff",
+   "text": "That's enough talking for one week."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "gruff",
+   "text": "Undock clean. I'll be watching."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Safe burns! Come find me again, I'll have new stories."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Bye now! Give my regards to whoever's at {nearby}."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Off you go! Watch your periapsis, I'd hate to lose a good listener."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Clear skies, or, well, clear vacuum!"
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "cheerful",
+   "text": "Take care of that {hull}. It's a Gerald. Geralds need love."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "nervous",
+   "text": "Okay. Goodbye. Undock gently. Gently!"
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "nervous",
+   "text": "Bye. Sorry. Thank you. Sorry."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "nervous",
+   "text": "You'll be fine. I'll be fine. Everyone's fine. Go."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "nervous",
+   "text": "Please match velocity before you release. Please."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "nervous",
+   "text": "That wasn't so bad. Was it? It wasn't. Goodbye."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "formal",
+   "text": "Good day, captain. Fly well."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "formal",
+   "text": "Until next time. I wish you a clean approach and a fair price."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "formal",
+   "text": "Safe voyage. Mind the heat line."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "formal",
+   "text": "Farewell. You have my thanks for the courtesy."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "formal",
+   "text": "Goodbye. The hatch will seal thirty seconds after you release."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "sly",
+   "text": "Off you go. Try not to tell anyone what you paid."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "sly",
+   "text": "See you around. I'll know before you do."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "sly",
+   "text": "Go on. And check your hold before you sell. I'm kidding. Mostly."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "sly",
+   "text": "Later, captain. Keep a hatch key spare."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "sly",
+   "text": "Until we meet again. We will. It's a small galaxy and I owe you nothing yet."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "any",
+   "text": "Safe flying."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "any",
+   "text": "Clear the lane on your way out."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "any",
+   "text": "See you in {system}, or the next one."
+  },
+  {
+   "cat": "farewell",
+   "who": "any",
+   "mood": "any",
+   "text": "Mind the {star}."
+  },
+  {
+   "cat": "farewell",
+   "who": "vendor",
+   "mood": "any",
+   "text": "Come back when your hold's empty. Or full. Either works for me."
+  },
+  {
+   "cat": "farewell",
+   "who": "vendor",
+   "mood": "any",
+   "text": "Thanks for stopping at {station}. Tell your friends. Tell your enemies, they have credits too."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "vendor",
+   "mood": "any",
+   "text": "You'd think a station would be quiet. It never is. Something is always venting."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "vendor",
+   "mood": "any",
+   "text": "I've never left {station}. Why would I? Everything interesting docks here eventually."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "vendor",
+   "mood": "any",
+   "text": "The pilots all say the same thing when they land: 'you should see the prices at the last place'. Then they buy anyway."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "pilot",
+   "mood": "any",
+   "text": "I'll be at {dest} in a few days if the burn goes right. Then it's the same thing again the other way."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "pilot",
+   "mood": "any",
+   "text": "This {ship} has done more orbits than I have. I try not to think about what that means."
+  },
+  {
+   "cat": "smalltalk",
+   "who": "pilot",
+   "mood": "any",
+   "text": "Coasting is the job. Burning is the ten percent everyone talks about."
+  }
+ ]
+}
